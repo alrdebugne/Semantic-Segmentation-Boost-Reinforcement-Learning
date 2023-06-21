@@ -6,6 +6,10 @@
 [![PyPI license](https://img.shields.io/pypi/l/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
 [![Generic badge](https://img.shields.io/badge/Paper-DOI-blue.svg)](https://doi.org/10.1007/s11042-022-13695-1)
 
+
+This fork merely exists because `cv2` imports were failing on my setup. I haven't conducted extensive tests to understand why or how to fix it. All rights & credits go to the authors at [vpulab](https://github.com/vpulab/Semantic-Segmentation-Boost-Reinforcement-Learning).
+
+
 </p>
 <center>
 <img src="./Images/Mario_example.gif" width="600">
