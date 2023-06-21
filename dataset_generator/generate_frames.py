@@ -368,7 +368,7 @@ class FrameGenerator():
             frame = cv2.cvtColor(frame.astype(np.uint8), cv2.COLOR_RGB2BGR)
             cv2.imwrite("dataset/PNG/%d.png" % (i), frame)
             sframe = cv2.cvtColor(sframe.astype(np.uint8), cv2.COLOR_RGB2BGR)
-            cv2.imwrite("dataset/Segmentation/%d.png" % (i), sframe)
+            # cv2.imwrite("dataset/Segmentation/%d.png" % (i), sframe)
             # labels = framegen.GenerateLabelImageFromSegmentation(sframe) #Esto habra que cambiarlo para que segun genere la segmentacion lo haga
             cv2.imwrite("dataset/Labels/%s.png" % (i), classframe)
         # image_list.write(str(filename))
