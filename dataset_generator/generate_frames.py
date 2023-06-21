@@ -12,8 +12,8 @@ import time
 import argparse
 from tqdm import tqdm
 
-from utils.generate_grid import GridGenerator
-from utils.load_sprites import SpriteLoader
+from .utils.generate_grid import GridGenerator
+from .utils.load_sprites import SpriteLoader
 # the background color changes based on level
 
 
