@@ -22,7 +22,7 @@ from gym_super_mario_bros.actions import RIGHT_ONLY
 import gym
 import numpy as np
 import collections 
-from cv2 import cv2
+import cv2
 import matplotlib.pyplot as plt
 from IPython import display
 from segmentator import Segmentator

@@ -6,7 +6,7 @@ import shutil
 import multiprocessing
 import pandas as pd
 import numpy as np
-from cv2 import cv2
+import cv2
 import time
 
 import argparse
@@ -47,20 +47,24 @@ class FrameGenerator():
         self.grid_w = 17
 
         # Set existing classes
-        self.classes = {"default": 0,
-                        'floor': 1,
-                        'brick': 2,
-                        'box': 3,
-                        'enemy': 4,
-                        'mario': 5}
+        self.classes = {
+            "default": 0,
+            "floor": 1,
+            "brick": 2,
+            "box": 3,
+            "enemy": 4,
+            "mario": 5
+        }
 
         # For segmented frames, set a color per class.
-        self.classcolors = {"default": [0, 0, 0],
-                            'floor': [0, 0, 255],
-                            'brick': [127, 127, 0],
-                            'box': [0, 255, 0],
-                            'enemy': [255, 0, 0],
-                            'mario': [255, 255, 0]}
+        self.classcolors = {
+            "default": [0, 0, 0],
+            "floor": [0, 0, 255],
+            "brick": [127, 127, 0],
+            "box": [0, 255, 0],
+            "enemy": [255, 0, 0],
+            "mario": [255, 255, 0]
+        }
 
     def SetLevelSprites(self, level):
         '''This function loads sprites and textures that will be used in the image.
