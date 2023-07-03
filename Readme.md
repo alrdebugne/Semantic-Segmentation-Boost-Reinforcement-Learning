@@ -7,7 +7,16 @@
 [![Generic badge](https://img.shields.io/badge/Paper-DOI-blue.svg)](https://doi.org/10.1007/s11042-022-13695-1)
 
 
-This fork merely exists because `cv2` imports were failing on my setup. I haven't conducted extensive tests to understand why or how to fix it. All rights & credits go to the authors at [vpulab](https://github.com/vpulab/Semantic-Segmentation-Boost-Reinforcement-Learning).
+# Disclaimer
+
+This fork exists for two reasons:
+1. Fixes `cv2` imports, which were failing on my setup
+2. Adds more sprites to the auto-generated dataset to push the boundaries of the segmentation-based transfer learning.
+
+All rights & credits go to the authors at [vpulab](https://github.com/vpulab/Semantic-Segmentation-Boost-Reinforcement-Learning).
+
+
+# Original README
 
 
 </p>
