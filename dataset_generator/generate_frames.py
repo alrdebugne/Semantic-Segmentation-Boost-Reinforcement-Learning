@@ -12,8 +12,8 @@ import time
 import argparse
 from tqdm import tqdm
 
-from .utils.generate_grid import GridGenerator
-from .utils.load_sprites import SpriteLoader
+from utils.generate_grid import GridGenerator
+from utils.load_sprites import SpriteLoader
 # the background color changes based on level
 
 
@@ -371,6 +371,8 @@ class FrameGenerator():
             # cv2.imwrite("dataset/Segmentation/%d.png" % (i), sframe)
             # labels = framegen.GenerateLabelImageFromSegmentation(sframe) #Esto habra que cambiarlo para que segun genere la segmentacion lo haga
             cv2.imwrite("dataset/Labels/%s.png" % (i), classframe)
+            # Adding 2e6 locally to differentiate from labels created online
+
         # image_list.write(str(filename))
 
     def GenerateDataset(self, samples):

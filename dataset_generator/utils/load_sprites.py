@@ -126,6 +126,12 @@ class SpriteLoader():
                    '[piranha_2]':cv2.imread("EnemySprites/piranha_"+str(tileset)+"_1.png")[...,::-1]}
         
         return piranha
+    
+    def loadCheepCheep(tileset = 0):
+        pass
+
+    def loadSpiny(tileset = 0):
+        pass
 
 
     #GENERATE SEGMENTATION GT FOR SOME SPRITES
