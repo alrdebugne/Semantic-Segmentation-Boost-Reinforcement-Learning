@@ -396,27 +396,42 @@ class GridGenerator():
             random_free_floor = np.random.permutation(self.free_floor)
             block_l = random_free_floor[:spinies_n]
             self.free_floor = random_free_floor[spinies_n:]
-            size = np.random.choice(np.arange(1, 4), p=[0.65, 0.25, 0.1])
 
             for i in np.arange(spinies_n):
-                b_type = np.random.choice(np.arange(3), size=size, p=[0.3, 0.3, 0.4])
-                for k in np.arange(size):
-                    if b_type[k] < 2:
-                        # Grounded spiny
-                        b_label = "[spiny_1]" if k == 0 else "[spiny_2]"
-                        self.grid[12, block_l[i], 2] = b_label
-                    else:
-                        # Airborne spiny: place randomly in the air
-                        b_label = "[spiny_3]"
-                        h = np.random.randint(1, 12)
-                        # 12: floor level (in units of sprits, i.e. 16 pixels)
-                        self.grid[h, block_l[i], 2] = b_label
+                k = np.random.randint(3)
+                if k < 2:
+                    # Grounded spiny
+                    b_label = "[spiny_1]" if k == 0 else "[spiny_2]"
+                    self.grid[12, block_l[i], 2] = b_label
+                else:
+                    # Airborne spiny: place randomly in the air
+                    b_label = "[spiny_3]"
+                    h = np.random.randint(1, 12)
+                    # 12: floor level (in units of sprits, i.e. 16 pixels)
+                    self.grid[h, block_l[i], 2] = b_label
+
+    def GenerateCheepCheeps(self):
+        # Place cheep-cheeps
+        cheepcheep_n = np.random.choice(np.arange(3), p=[0.30, 0.60, 0.10])
+        if cheepcheep_n != 0:
+            # where are they placed
+            random_free_floor = np.random.permutation(self.free_floor)
+            block_l = random_free_floor[:cheepcheep_n]
+            self.free_floor = random_free_floor[cheepcheep_n:]
+
+            for i in np.arange(cheepcheep_n):
+                k = np.random.randint(2)
+                b_label = '[cheepcheep_1]' if k == 0 else '[cheepcheep_2]'
+                # Airborne at random height (not too close to ceiling)
+                h = np.random.randint(4, 12)
+                self.grid[h, block_l[i], 2] = b_label
 
             
     def GenerateEnemies(self):
         self.GenerateMushrooms()
         self.GenerateKoopas()
         self.GenerateSpinies()
+        self.GenerateCheepCheeps()
 
     def GenerateMario(self):
         # at last, place mario. For this, first choose if he's on the floor or jumping
