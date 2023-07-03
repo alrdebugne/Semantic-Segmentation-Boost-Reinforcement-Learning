@@ -128,10 +128,26 @@ class SpriteLoader():
         return piranha
     
     def loadCheepCheep(tileset = 0):
-        pass
+        cheepcheep = {
+            "[cheepcheep_1]": cv2.imread("EnemySprites/cheepcheep_" + str(tileset) + "_0.png")[...,::-1],
+            "[cheepcheep_2]": cv2.imread("EnemySprites/cheepcheep_" + str(tileset) + "_1.png")[...,::-1]
+        }
+        return cheepcheep
 
     def loadSpiny(tileset = 0):
-        pass
+        spiny = {
+            "[spiny_1]": cv2.imread("EnemySprites/spiny_0_0.png")[...,::-1],
+            "[spiny_2]": cv2.imread("EnemySprites/spiny_0_1.png")[...,::-1],
+            "[spiny_3]": cv2.imread("EnemySprites/spiny_0_2.png")[...,::-1]
+        }
+        return spiny
+
+    def loadLakitu(tileset = 0):
+        lakitu = {
+            "[lakitu_1]": cv2.imread("EnemySprites/lakitu_" + str(tileset) + "_0.png")[...,::-1],
+            "[lakitu_2]": cv2.imread("EnemySprites/lakitu_" + str(tileset) + "_1.png")[...,::-1]
+        }
+        return lakitu
 
 
     #GENERATE SEGMENTATION GT FOR SOME SPRITES

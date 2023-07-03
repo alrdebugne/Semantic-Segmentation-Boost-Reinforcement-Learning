@@ -3,11 +3,15 @@ import numpy as np
 
 class GridGenerator():
 
-    def __init__(self, width=17, height=15):
+    def __init__(self, width: int = 17, height: int = 15):
         self.grid_w = width
         self.grid_h = height
-        self.grid = np.array([[['[background]', 'Empty', 'Empty'] for a in np.arange(
-            self.grid_w)] for b in np.arange(self.grid_h)], dtype='object')
+        self.grid = np.array([
+            [
+                ['[background]', 'Empty', 'Empty']
+                for a in np.arange(self.grid_w)
+            ] for b in np.arange(self.grid_h)
+        ], dtype='object')
         self.free_floor = np.arange(self.grid_w)
         self.havefloor = []
         self.floor_level = 12
@@ -349,7 +353,6 @@ class GridGenerator():
     def GenerateMushrooms(self):
         # place some mushrooms
         block_n = np.random.choice(np.arange(4), p=[0.1, 0.25, 0.35, 0.3])
-        # print("Mushrooms:",block_n)
         if block_n != 0:
             # where are they placed
             random_free_floor = np.random.permutation(self.free_floor)
@@ -358,8 +361,7 @@ class GridGenerator():
             size = np.random.choice(np.arange(1, 4), p=[0.65, 0.25, 0.1])
 
             for i in np.arange(block_n):
-                b_type = np.random.choice(
-                    np.arange(2), size=size, p=[0.5, 0.5])
+                b_type = np.random.choice(np.arange(2), size=size, p=[0.5, 0.5])
                 for k in np.arange(size):
                     b_label = '[mush_1]'
                     if b_type[k] == 1:
@@ -369,9 +371,7 @@ class GridGenerator():
 
     def GenerateKoopas(self):
         # Place koopas
-
         koopa_n = np.random.choice(np.arange(3), p=[0.8, 0.15, 0.05])
-        # print("Mushrooms:",block_n)
         if koopa_n != 0:
             # where are they placed
             random_free_floor = np.random.permutation(self.free_floor)
@@ -380,18 +380,43 @@ class GridGenerator():
             size = np.random.choice(np.arange(1, 4), p=[0.65, 0.25, 0.1])
 
             for i in np.arange(koopa_n):
-                b_type = np.random.choice(
-                    np.arange(2), size=size, p=[0.5, 0.5])
+                b_type = np.random.choice(np.arange(2), size=size, p=[0.5, 0.5])
                 for k in np.arange(size):
                     b_label = '[koopa_1]'
                     if b_type[k] == 1:
                         b_label = '[koopa_2]'
 
                     self.grid[12, block_l[i], 2] = b_label
+    
+    def GenerateSpinies(self):
+        # Place spinies
+        spinies_n = np.random.choice(np.arange(3), p=[0.8, 0.15, 0.05])
+        if spinies_n != 0:
+            # Place grounded spinies on the floor, and airborne spinies in the air
+            random_free_floor = np.random.permutation(self.free_floor)
+            block_l = random_free_floor[:spinies_n]
+            self.free_floor = random_free_floor[spinies_n:]
+            size = np.random.choice(np.arange(1, 4), p=[0.65, 0.25, 0.1])
 
+            for i in np.arange(spinies_n):
+                b_type = np.random.choice(np.arange(3), size=size, p=[0.3, 0.3, 0.4])
+                for k in np.arange(size):
+                    if b_type[k] < 2:
+                        # Grounded spiny
+                        b_label = "[spiny_1]" if k == 0 else "[spiny_2]"
+                        self.grid[12, block_l[i], 2] = b_label
+                    else:
+                        # Airborne spiny: place randomly in the air
+                        b_label = "[spiny_3]"
+                        h = np.random.randint(1, 12)
+                        # 12: floor level (in units of sprits, i.e. 16 pixels)
+                        self.grid[h, block_l[i], 2] = b_label
+
+            
     def GenerateEnemies(self):
         self.GenerateMushrooms()
         self.GenerateKoopas()
+        self.GenerateSpinies()
 
     def GenerateMario(self):
         # at last, place mario. For this, first choose if he's on the floor or jumping

@@ -130,19 +130,21 @@ class FrameGenerator():
 
         # Load Enemies
         self.mushroom = SpriteLoader.loadGoombas(tileset)
-        self.smushroom = SpriteLoader.GenerateSSGT(
-            self.mushroom, self.classcolors['enemy'])
+        self.smushroom = SpriteLoader.GenerateSSGT(self.mushroom, self.classcolors['enemy'])
         self.koopa = SpriteLoader.loadKoopa(tileset)
-        self.skoopa = SpriteLoader.GenerateSSGT(
-            self.koopa, self.classcolors['enemy'])
+        self.skoopa = SpriteLoader.GenerateSSGT(self.koopa, self.classcolors['enemy'])
         self.piranha = SpriteLoader.loadPiranha(tileset)
-        self.spiranha = SpriteLoader.GenerateSSGT(
-            self.piranha, self.classcolors['enemy'])
+        self.spiranha = SpriteLoader.GenerateSSGT(self.piranha, self.classcolors['enemy'])
+        self.cheepcheep = SpriteLoader.loadCheepCheep(tileset)
+        self.scheepcheep = SpriteLoader.GenerateSSGT(self.cheepcheep, self.classcolors['enemy'])
+        self.spiny = SpriteLoader.loadSpiny(tileset)
+        self.sspiny = SpriteLoader.GenerateSSGT(self.spiny, self.classcolors['enemy'])
+        self.lakitu = SpriteLoader.loadLakitu(tileset)
+        self.slakitu = SpriteLoader.GenerateSSGT(self.lakitu, self.classcolors['enemy'])
 
         # Load mario sprites
         self.mario = SpriteLoader.loadMario()
-        self.smario = SpriteLoader.GenerateSSGT(
-            self.mario, self.classcolors['mario'])
+        self.smario = SpriteLoader.GenerateSSGT(self.mario, self.classcolors['mario'])
 
     def generate_frame(self, level='000', grid=[]):
         # Generate the grid for the level
@@ -150,7 +152,6 @@ class FrameGenerator():
             grid = self.generate_grid(level)
 
         self.SetLevelSprites(level)
-
         self.LoadSprites(level)
 
         if level[1] == '2':
@@ -243,12 +244,36 @@ class FrameGenerator():
                         for j in np.arange(16):
                             # Only print non background pixels
                             if (self.mushroom[grid[row, column, 2]][i, j] != self.sprite_bg_color).any():
-                                frame[frow+i, fcol+j,
-                                      :] = self.mushroom[grid[row, column, 2]][i, j]
-                                sframe[frow+i, fcol+j,
-                                       :] = self.smushroom[grid[row, column, 2]][i, j]
-                                classframe[frow+i, fcol +
-                                           j] = self.classes['enemy']
+                                frame[frow + i, fcol + j, :] = self.mushroom[grid[row, column, 2]][i, j]
+                                sframe[frow + i, fcol + j, :] = self.smushroom[grid[row, column, 2]][i, j]
+                                classframe[frow + i, fcol + j] = self.classes['enemy']
+                
+                if grid[row, column, 2][1:6] == 'spiny':
+                    for i in np.arange(16):
+                        for j in np.arange(16):
+                            # Only print non background pixels
+                            if (self.spiny[grid[row, column, 2]][i, j] != self.sprite_bg_color).any():
+                                frame[frow + i, fcol + j, :] = self.spiny[grid[row, column, 2]][i, j]
+                                sframe[frow + i, fcol + j, :] = self.sspiny[grid[row, column, 2]][i, j]
+                                classframe[frow + i, fcol + j] = self.classes['enemy']
+                
+                if grid[row, column, 2][1:7] == 'lakitu':
+                    for i in np.arange(16):
+                        for j in np.arange(16):
+                            # Only print non background pixels
+                            if (self.lakitu[grid[row, column, 2]][i, j] != self.sprite_bg_color).any():
+                                frame[frow + i, fcol + j, :] = self.lakitu[grid[row, column, 2]][i, j]
+                                sframe[frow + i, fcol + j, :] = self.slakitu[grid[row, column, 2]][i, j]
+                                classframe[frow + i, fcol + j] = self.classes['enemy']
+
+                if grid[row, column, 2][1:11] == 'cheepcheep':
+                    for i in np.arange(16):
+                        for j in np.arange(16):
+                            # Only print non background pixels
+                            if (self.cheepcheep[grid[row, column, 2]][i, j] != self.sprite_bg_color).any():
+                                frame[frow + i, fcol + j, :] = self.cheepcheep[grid[row, column, 2]][i, j]
+                                sframe[frow + i, fcol + j, :] = self.scheepcheep[grid[row, column, 2]][i, j]
+                                classframe[frow + i, fcol + j] = self.classes['enemy']
 
                 if grid[row, column, 2][1:6] == 'koopa':
                     for i in np.arange(32):
@@ -256,12 +281,9 @@ class FrameGenerator():
                             row_off = frow+i-16
                             # Only print non background pixels
                             if (self.koopa[grid[row, column, 2]][i, j] != self.sprite_bg_color).any():
-                                frame[row_off, fcol+j,
-                                      :] = self.koopa[grid[row, column, 2]][i, j]
-                                sframe[row_off, fcol+j,
-                                       :] = self.skoopa[grid[row, column, 2]][i, j]
-                                classframe[row_off, fcol +
-                                           j] = self.classes['enemy']
+                                frame[row_off, fcol+j, :] = self.koopa[grid[row, column, 2]][i, j]
+                                sframe[row_off, fcol+j, :] = self.skoopa[grid[row, column, 2]][i, j]
+                                classframe[row_off, fcol + j] = self.classes['enemy']
 
                 if grid[row, column, 2][1:8] == 'piranha':
                     # Columns go from 0 to x, increasing, so first reaches left side of a "piranha cell"
